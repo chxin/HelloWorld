@@ -1,0 +1,539 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <conio.h>
+
+void printLines(int *a);
+void delay_ms(int n);
+void initial(int *a);
+int checkDup(int *a,int i);
+void exchange(int *a,int x,int y);
+int position(int *a,int value);
+void offCZeroOne(int *a);
+void moveOneToA(int *a);
+void moveTwoToB(int *a);
+void moveThreeToEZeroToD(int *a);
+void moveThreeToCZeroToD(int *a);
+void moveFourToF(int *a);
+void moveFiveToEZeroToD(int *a);
+void moveFiveToIZeroToD(int *a);
+void moveSixToH(int *a);
+
+int main()
+{
+	int a[9]={0};
+	int pos;
+	initial(a);
+
+	offCZeroOne(a);
+	moveOneToA(a);
+	moveTwoToB(a);
+	pos = position(a,3);
+	if(pos != 2)
+	{
+		moveThreeToEZeroToD(a);
+		moveThreeToCZeroToD(a);
+	}
+	moveFourToF(a);
+	pos = position(a,5);
+	if (pos != 8 )
+	{
+		moveFiveToEZeroToD(a);
+		moveFiveToIZeroToD(a);
+	}
+	moveSixToH(a);
+
+	printLines(a);
+	
+	// print的位置，以及清屏函数
+	if (position(a,7) == 6)
+	{
+		printf("%s\n", "success!");
+	}
+	else{
+		printf("%s\n","error:the original task can not be finished" );
+	}
+	printf("%s\n","press any key to exit!" );
+	getch();
+	return 0;
+}
+
+/**********************功能函数***************************/
+void printLines(int *a)   //将一维数组3*3打印输出
+{
+	delay_ms(500);
+	system("clS");
+
+	for(int i = 0; i < 3 ;i ++)
+	{
+		printf("%d    %d    %d    \n",*(a+i*3),*(a+i*3+1),*(a+i*3+2));
+	}
+	}
+
+void exchange(int *a,int x,int y)  //数组中第x个元素和第y个元素交换
+{
+	int temp;
+	temp = *(a + y);
+	*(a + y) = *(a + x);
+	*(a + x) = temp;
+}
+
+int checkDup(int *a,int i)  //检查第i个元素是否已经存在
+{
+	for(int n=0;n<i;n++)
+	{
+		if (*(a+n) == *(a+i))
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
+int position(int *a,int value)  //检查值为value的元素在数组a中位置
+{
+	for(int n=0;n<9;n++)
+	{
+		if (*(a+n) == value)
+		{
+			return n;			
+		}
+	}
+	return -1;
+}
+
+void delay_ms(int n)
+{
+	int i = 0;
+	while(i<=n)
+	{
+		i++;
+		for(int m=0;m<600000;m++)
+		{
+
+		}
+	}
+}
+/************************过程函数***********************/
+
+void initial(int *a)  //随机生成原始数组
+{
+	int value = 0;
+	time_t t;
+	srand(time(&t));
+	for (int i=0;i<9;i++)
+	{
+		value = rand()%9;
+		*(a+i) = value;
+		while(checkDup(a,i))
+		{
+			value = rand()%9;
+			*(a+i) = value;			
+		}
+	}
+	printLines(a);
+	printf("%s\n","the original status was created randomly" );
+	printf("%s\n","Press any key to start" );
+	
+	getch();
+	
+}
+
+void offCZeroOne(int *a)  //将在C位的1或0移开
+{
+	int pos0 = position(a,0);
+	int pos1 = position(a,1);
+	printf("%s\n","move 0 & 1 off position C" );
+	if(pos0 == 2 || pos1 == 2)
+	{
+		exchange(a,2,5);
+		int pos0 = position(a,0);
+		int pos1 = position(a,1);
+		printLines(a);
+		printf("%s\n","move 0 & 1 off position C" );
+		if(pos0 == 2 || pos1 == 2)
+		{
+			exchange(a,2,1);
+			printLines(a);
+		}
+	}
+}
+
+void moveOneToA(int *a)
+{
+	int pos0,pos1;
+	pos0 = position(a,0);
+	pos1 = position(a,1);
+	while(pos1 != 0)
+	{
+		switch(pos0)
+		{
+			case 0:
+				exchange(a,0,3);
+				break;
+
+			case 1:
+				exchange(a,1,0);
+				break;
+
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,1);
+				break;
+
+			case 5:
+				exchange(a,5,4);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,8);
+				break;
+
+			case 8:
+				exchange(a,8,5);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos1 = position(a,1);
+		printf("\n\n%s\n","Move 1 to position A" );
+		printLines(a);
+	}	
+}
+
+void moveTwoToB(int *a)
+{
+	int pos0,pos2;
+	pos0 = position(a,0);
+	pos2 = position(a,2);
+	while(pos2 != 1)
+	{
+		switch(pos0)
+		{
+			
+
+			case 1:
+				exchange(a,1,4);
+				break;
+
+			case 2:
+				exchange(a,2,1);
+				break;
+
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,3);
+				break;
+
+			case 5:
+				exchange(a,5,2);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,8);
+				break;
+
+			case 8:
+				exchange(a,8,5);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos2 = position(a,2);
+		printf("\n\n%s\n","Move 2 to position B" );
+		printLines(a);
+	}
+	
+}
+
+void moveThreeToEZeroToD(int *a)
+{
+	int pos0,pos3;
+	pos0 = position(a,0);
+	pos3 = position(a,3);
+	while(pos3 != 4 ) //&& pos0 != 3
+	{
+		switch(pos0)
+		{			
+			
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,3);
+				break;
+
+			case 5:
+				exchange(a,5,4);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,8);
+				break;
+
+			case 8:
+				exchange(a,8,5);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos3 = position(a,3);
+		printf("\n\n%s\n","Move 3 to position E" );
+		printLines(a);
+	}
+	
+}
+
+void moveThreeToCZeroToD(int *a)
+{
+	int pos0,pos3,previous;
+	pos0 = position(a,0);
+	pos3 = position(a,3);
+	previous = 3;
+
+	/***********/
+	exchange(a,3,0);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,0,1);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,1,4);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,4,5);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,5,2);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,2,1);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,1,0);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	exchange(a,0,3);
+	printLines(a);
+	printf("\n\n%s\n","Move 3 to position C" );
+	/**********/
+	// while(pos3 != 2 ) //&& pos0 !=3
+	// {
+	// 	switch(pos0)
+	// 	{			
+	// 		case 0:
+	// 			if(previous == 3)
+	// 			{
+	// 				exchange(a,0,1);
+	// 			}
+	// 			if(previous == 1)
+	// 			{
+	// 				exchange(a,0,3);
+	// 			}
+	// 			previous = pos0;
+	// 			break;
+	// 		case 1:
+	// 			if(previous == 0)
+	// 			{
+	// 				exchange(a,1,4);
+	// 			}
+	// 			if(previous == 2)
+	// 			{
+	// 				exchange(a,1,0);
+	// 			}
+	// 			previous = pos0;
+	// 			break;
+	// 		case 2:
+	// 			exchange(a,2,1);
+	// 			previous = pos0;
+	// 			break;
+	// 		case 3:
+	// 			exchange(a,3,0);
+	// 			previous = pos0;
+	// 			break;
+	// 		case 4:
+	// 			exchange(a,4,5);
+	// 			previous = pos0;
+	// 			break;
+	// 		case 5:
+	// 			exchange(a,5,2);
+	// 			previous = pos0;
+	// 			break;
+	// 	}	
+	// 	pos0 = position(a,0);
+	// 	pos3 = position(a,3);
+	// }
+	
+}
+
+void moveFourToF(int *a)
+{
+	int pos0,pos4;
+	pos0 = position(a,0);
+	pos4 = position(a,4);
+	while(pos4 != 5)
+	{
+		switch(pos0)
+		{			
+			
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,3);
+				break;
+
+			case 5:
+				exchange(a,5,4);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,8);
+				break;
+
+			case 8:
+				exchange(a,8,5);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos4 = position(a,4);
+		printf("\n\n%s\n","Move 4 to position F" );
+		printLines(a);
+	}
+}
+
+void moveFiveToEZeroToD(int *a)
+{
+	int pos0,pos5;
+	pos0 = position(a,0);
+	pos5 = position(a,5);
+	while(pos5 != 4 ) //&& pos0 != 3
+	{
+		switch(pos0)
+		{
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,3);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,4);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos5 = position(a,5);
+		printf("\n\n%s\n","Move 5 to position E" );
+		printLines(a);
+	}
+	
+}
+
+void moveFiveToIZeroToD(int *a)
+{
+	int pos0,pos5,previous;
+	pos0 = position(a,0);
+	pos5 = position(a,5);
+	// while(pos5 != 8 && pos0 != 3)
+	// {
+		exchange(a,3,0);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,0,1);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,1,2);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,2,5);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,5,4);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,4,7);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,7,8);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,8,5);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,5,2);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		printLines(a);
+		exchange(a,2,1);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,1,0);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+		exchange(a,0,3);
+		printf("\n\n%s\n","Move 5 to position I" );
+		printLines(a);
+	// }
+	
+}
+
+void moveSixToH(int *a)
+{
+	
+	int pos0,pos6;
+	pos0 = position(a,0);
+	pos6 = position(a,6);
+	while(pos6 != 7 )
+	{
+		switch(pos0)
+		{
+			case 3:
+				exchange(a,3,6);
+				break;
+
+			case 4:
+				exchange(a,4,3);
+				break;
+
+			case 6:
+				exchange(a,6,7);
+				break;
+
+			case 7:
+				exchange(a,7,4);
+				break;
+		}	
+		pos0 = position(a,0);
+		pos6 = position(a,6);
+
+		printf("\n\n%s\n","Move 6 to position H" );
+		printLines(a);
+	}	
+}
