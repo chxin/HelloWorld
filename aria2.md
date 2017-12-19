@@ -1,0 +1,1 @@
+`aria2c --conf-path="/Users/xxxxxx/.aria2/aria2.conf" -D`，然后 aria2 就启动了，
