@@ -50,7 +50,7 @@
 
    　　　　敲入如下命令回车执行
 
-   　　　　sudo keytool -import -alias cacerts -keystore cacerts -file ~/Documents/***.cer
+   　　　　sudo keytool -import -alias cacerts -keystore cacerts -file ~/Documents/Certification/ZscalerRootCA.cer
 
    ​		如果permission denied，用sudo
 
@@ -77,3 +77,8 @@
    buildserver
    P@ssw0rd
    ```
+
+9. eRock证书
+
+   1. 密码：123456
+   2. bundle id: cn.com.schneider-electric.EDisco

@@ -454,3 +454,34 @@ Note: Recompile with -Xlint:deprecation for details.
 2 errors
 
 :app:compileInternalReleaseJavaWithJavac FAILED
+
+9. react-native run-android --variant=internalDebug
+
+10. travis 配置
+  1. 密码问题：加密 or 设置环境变量
+
+  2. 环境配置：android-ndk
+
+  3. 系统选择：os or linux
+
+     ```
+     npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@^1.0.0 (node_modules/chokidar/node_modules/fsevents):
+
+     npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.1.3: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+     npm WARN static-container@1.2.0 requires a peer of prop-types@^15.5.10 but none was installed.
+     ```
+
+     ​
+
+11. iOS 环境配置
+    1. 证书是如何产生的
+    2. 账号、证书（配置，导出，安装，使用）、秘钥
+    3. 配置text和prod的区别
+    4. Certificates and Profiles
+
+12. 解锁,否则回弹框等待输入密码
+
+    codesign wants to access key dist in your keychain
+
+    1. ​

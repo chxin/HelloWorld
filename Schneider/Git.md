@@ -17,7 +17,7 @@
 
    git tag 标签
 
-   git remoter 远程信息
+   git remote 远程信息
 
 3. 提交
 
@@ -49,7 +49,9 @@
 
 7. 标签
 
-   git tag -a v0.1 -m "version 0.1 released" 3628164 创建标签
+   git tag -a v0.1 -m "version 0.1 released" 3628164	 创建标签
+
+   git push origin —tags
 
 8. 远程
 
@@ -65,4 +67,10 @@
 
    git clone git@github.com:michaelliao/gitskills.git
 
-   ​
+9. 配置
+
+   ```
+   git config --global user.name "tiemaocsdn"
+   git config --global user.email "tiemaocsdn@qq.com"
+   git config --global push.default simple
+   ```

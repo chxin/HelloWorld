@@ -208,4 +208,45 @@
 
   ​	设置版本号version、图标 
 
-  11. ![RN生命周期](http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG)
+  11. ​
+
+  ![RN生命周期](http://7xqg0d.com1.z0.glb.clouddn.com/hexoBlog/react-native%E5%A3%B0%E6%98%8E%E5%91%A8%E6%9C%9F.PNG)
+
+  12. ios证书
+
+      1. iOS证书分2种，1种是开发证书，用来给你（开发人员）做真机测试的；1种是发布证书，发布证书又分发布到app store的（这里不提及）和发布测试的ad hoc证书。
+
+      2. ```
+          1、设置“Build Settings”，下图是官方文档截图，留意那个红框，居然说反了
+          ```
+
+         　　"Skip install"一定要选NO，否则在下面的打包步骤后，Organizer看不到你的程序，就为这折腾我好些时间，国外论坛一堆问题，说我按照官方文档做了，怎么Organizer看不到程序。
+
+         　　1.1 选择ad hoc证书.在“Code Signing”栏，选择你在文章（“iOS程序发布测试3-生成ad hoc证书”）生成的发布证书（ad hoc）
+
+         　　这里要选择“iPhone Distribution”，而不是“iPhone Development”，否则会在下面打包（Archive）步骤报证书错误。
+
+         　　2、编辑“Scheme”，选择菜单：Product -> Edit Scheme
+
+         　　红色框部分要选对，注意要分别选iOS Device和Release。
+
+         　　3、打包（Archive），选择菜单：Product->Archive，在organizer窗口可以看到你的程序
+
+         　　然后点击“share”按钮，进行发布（share）
+
+         　　4、Share
+
+         　　选第一个“iOS App Store Package”，生成.ipa文件，你的Tester使用itunes即可安装。
+
+         　　最后一个Archive，需要对方安装xcode。
+         ```
+
+      3. 检查 编译配置文件：product name, info.plist, version, Target Device Family, iOS Deployment Target, Code Signing Identity etc. 
+         ```
+
+  13. 安卓联调
+
+      ```
+      react-native run-android --variant=internalDebug
+      ```
+
