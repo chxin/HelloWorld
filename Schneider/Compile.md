@@ -246,6 +246,9 @@
 
   13. 安卓联调
 
+      1. 如何设置--variant=internalDebug
+         1. 在文件android/.idea/workspace.xml:
+
       ```
       react-native run-android --variant=internalDebug
       ```

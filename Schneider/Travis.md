@@ -1,10 +1,12 @@
 #### 1. Travis配置
 
-1. 在`git commit`中如果包含`[skip ci]`或`[ci skip]`，该提交就不会触发一次build。
+1. 设置为分享
 
-2. 如果多次提交同时push，默认只在最新提交执行一次build
+2. 在`git commit`中如果包含`[skip ci]`或`[ci skip]`，该提交就不会触发一次build。
 
-3. ```
+3. 如果多次提交同时push，默认只在最新提交执行一次build
+
+4. ```
    # 运行流程
    Install apt addons
    before_install
@@ -18,7 +20,7 @@
    after_script
    ```
 
-4. 支持github的同类软件
+5. 支持github的同类软件
 
    https://github.com/marketplace/category/continuous-integration
 
@@ -28,13 +30,15 @@
 
    2. 证书进行加、解密
 
-      1. 利用Travis的命令行工具在根目录执行下面的命令加密：
+      1. 利用
+
+      2. ​
 
          ```
          travis encrypt-file keys/***key --add
          ```
 
-      2. 在before_script里面就需要对证书解密还原(travis命令执行完后，自动在.travis.yml添加相关配置)
+      3. 在before_script里面就需要对证书解密还原(travis命令执行完后，自动在.travis.yml添加相关配置)
 
    3. 导入私钥、证书
 
@@ -98,3 +102,24 @@
    3. 打包，相关配置放在 script:中 ./gradlew assembleRelease
 
    4. 发布
+
+
+
+
+
+travis encrypt "keyEncryption=keyEncrypt" --add
+
+```
+openssl aes-256-cbc -k "keyEncrypt" -in android/app/hiprock.jks -out android/app/hiprock.jks.enc -a
+openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/privateKey.p12 -out ios/RockCer/privateKey.p12.enc -a
+openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/ios_distribution.cer -out ios/RockCer/ios_distribution.cer.enc -a
+openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/hocHipRock.mobileprovision -out ios/RockCer/hocHipRock.mobileprovision.enc -a
+```
+
+```
+- openssl aes-256-cbc -k "$keyEncryption" -in android/app/hiprock.jks.enc  -d -a -out android/app/hiprock.jks
+- openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/privateKey.p12.enc  -d -a -out ios/RockCer/privateKey.p12
+- openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/ios_distribution.cer.enc  -d -a -out ios/RockCer/ios_distribution.cer
+- openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/hocHipRock.mobileprovision.enc  -d -a -out ios/RockCer/hocHipRock.mobileprovision
+```
+

@@ -31,10 +31,10 @@
            1. ![flex](http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png)
            2. flex容器属性
                   1. flex-direction 主轴的方向（即项目的排列方向）row | row-reverse | column | column-reverse
-                            1. `row`（默认值）：主轴为水平方向，起点在左端。
-                          2. `row-reverse`：主轴为水平方向，起点在右端。
-                          3. `column`：主轴为垂直方向，起点在上沿。
-                          4. `column-reverse`：主轴为垂直方向，起点在下沿。
+                              1. `row`（默认值）：主轴为水平方向，起点在左端。
+                            2. `row-reverse`：主轴为水平方向，起点在右端。
+                            3. `column`：主轴为垂直方向，起点在上沿。
+                            4. `column-reverse`：主轴为垂直方向，起点在下沿。
                 2. flex-wrap如果一条轴线排不下，如何换行。nowrap | wrap | wrap-reverse;
                        1. `nowrap`（默认）：不换行。
                        2. `wrap`：换行，第一行在上方。
@@ -167,29 +167,29 @@
 
        10. 组件生命周期
 
-          1. constructor 是RN的构建函数，第一个语句必须是  ``` super(props) ```。在组件加载前最先调用，并且仅仅调用一次。最大的作用是定义状态机变量
-          2. componentWillMount  
-             1. 在render被调用前执行，如果在这个函数里用setState函数改变状态机变量，不会立即被渲染，而是该函数执行完了渲染。
-             2. 子组件的会在父组件的componentWillMount  执行完调用
-             3. 读取本地存储的数据
-          3. componentDidMount
-             1. 在初始渲染完成后被调用，只执行一次
-             2. 子组件的会在父组件的componentWillMount  执行前调用
-             3. 从网络侧获取的数据
-          4. componentWillReceiveProps
-             1. 接收到新的props时，被调用。接受参数（nextProps）
-             2. 老的props可以通过this.props访问，新的props在传入的参数中
-             3. 如果在这个函数里用setState函数改变状态机变量，不会立即被渲染，而是该函数执行完了渲染。
-          5. boolean shouldComponentUpdate( nextProps, nextState)
-             1. 接收到新的Props或者State时执行，返回值告诉是否需要重新渲染，flase不渲染
-          6. componentWillUpdate( nextProps, nextState )
-             1. 重新渲染前要调用
-             2. 不能通过this.setState再次改变状态机变量，可以在componentWillReceiveProps中进行改变
-          7. componentDidUpdate (prevProps, prevState)
-             1. 重新渲染完成后执行，传入的参数是渲染前的props和state
-          8. componentWillUnmount
-             1. 组件被卸载前执行
-             2. 如果RN组件申请了某些资源或者订阅了某些信息，需要在这个函数中释放资源，取消订阅
+         1. constructor 是RN的构建函数，第一个语句必须是  ``` super(props) ```。在组件加载前最先调用，并且仅仅调用一次。最大的作用是定义状态机变量
+         2. componentWillMount  
+            1. 在render被调用前执行，如果在这个函数里用setState函数改变状态机变量，不会立即被渲染，而是该函数执行完了渲染。
+            2. 子组件的会在父组件的componentWillMount  执行完调用
+            3. 读取本地存储的数据
+         3. componentDidMount
+            1. 在初始渲染完成后被调用，只执行一次
+            2. 子组件的会在父组件的componentWillMount  执行前调用
+            3. 从网络侧获取的数据
+         4. componentWillReceiveProps
+            1. 接收到新的props时，被调用。接受参数（nextProps）
+            2. 老的props可以通过this.props访问，新的props在传入的参数中
+            3. 如果在这个函数里用setState函数改变状态机变量，不会立即被渲染，而是该函数执行完了渲染。
+         5. boolean shouldComponentUpdate( nextProps, nextState)
+            1. 接收到新的Props或者State时执行，返回值告诉是否需要重新渲染，flase不渲染
+         6. componentWillUpdate( nextProps, nextState )
+            1. 重新渲染前要调用
+            2. 不能通过this.setState再次改变状态机变量，可以在componentWillReceiveProps中进行改变
+         7. componentDidUpdate (prevProps, prevState)
+            1. 重新渲染完成后执行，传入的参数是渲染前的props和state
+         8. componentWillUnmount
+            1. 组件被卸载前执行
+            2. 如果RN组件申请了某些资源或者订阅了某些信息，需要在这个函数中释放资源，取消订阅
 
        11. 项目配置
 
@@ -203,3 +203,4 @@
               2. 图标：./android/app/src/main/res的五个目录
               3. 签名打包 ./android/app/build/outputs/apk/app-release.apk
               4. ​
+

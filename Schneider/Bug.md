@@ -485,3 +485,21 @@ Note: Recompile with -Xlint:deprecation for details.
     codesign wants to access key dist in your keychain
 
     1. ​
+
+13. **Undefined is not an object(evaluating'_react3.default.PropType.shape')**
+
+    1. 在使用组件Navigator时，报错，原因是prop-types组件
+    2. Check your version of react, If the version is > 16 then propTypes is inside a new package called `prop-types`
+    3. do ` npm i --save prop-types ` and then in your component import PropTypes from 'prop-types'
+    4. 仍然报错，之后发现，在该Navigator的组件模块中，仍然使用的是React.PropTypes，没有更新，故只能弃用该组件
+
+14.  Invariant Violation: Element type is invalid: expected a string (for built-in components) or a class/function but got: object
+
+    1. 关于module的处理方式错误
+       - import \*** from  \****   注意是否使用大括号
+       - export default 与module.export 的使用，以及引用import的使用
+
+15. checkBox在ios设备的表现
+
+    1. ​
+
