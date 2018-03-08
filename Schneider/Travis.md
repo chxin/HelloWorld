@@ -123,3 +123,87 @@ openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/hocHipRock.mobileprovision -
 - openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/hocHipRock.mobileprovision.enc  -d -a -out ios/RockCer/hocHipRock.mobileprovision
 ```
 
+
+
+
+
+### 3. ios操作步骤
+
+   1. 确保打包脚本运行顺利，并将项目设置为分享
+
+   2. 加密
+
+      1. ``` openssl aes-256-cbc -k "keyEncrypt" -in android/app/hiprock.jks -out android/app/hiprock.jks.enc -a
+
+         openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/ios_distribution.cer -out ios/RockCer/ios_distribution.cer.enc -a
+         openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/hocHipRock.mobileprovision -out ios/RockCer/hocHipRock.mobileprovision.enc -a
+         ```
+
+         2. 在.gitignore中，设置忽略加密的文件
+
+            ```
+
+            ```
+
+            ​
+
+   3. 配置环境
+
+      1. 在.travis.yml中
+
+   4. 解密和证书
+
+      1. ```
+
+         - openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/privateKey.p12.enc  -d -a -out ios/RockCer/privateKey.p12
+         - openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/ios_distribution.cer.enc  -d -a -out ios/RockCer/ios_distribution.cer
+         - openssl aes-256-cbc -k "$keyEncryption" -in ios/RockCer/hocHipRock.mobileprovision.enc  -d -a -out ios/RockCer/hocHipRock.mobileprovision
+         ```
+
+      2. source ios/RockCer/add-key.sh
+
+   5. 打包
+
+      1. source ./buildTestIpa.sh
+
+
+
+### 4. android操作步骤
+   1. 确保打包脚本运行顺利
+
+   2. 加密
+
+         1. ```
+            openssl aes-256-cbc -k "keyEncrypt" -in ios/RockCer/privateKey.p12 -out ios/RockCer/privateKey.p12.enc -a
+            ```
+
+         2. 在.gitignore中，设置忽略加密的文件
+
+            ```
+
+            ```
+
+            ​
+
+   3. 配置环境
+
+         1. 在.travis.yml中
+
+         2. 配置android ndk
+
+            ```
+            - wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
+            - chmod +x android-ndk-r10e-linux-x86_64.bin
+            - "./android-ndk-r10e-linux-x86_64.bin | grep ndk-build.cmd"
+            - export ANDROID_NDK=`pwd`/android-ndk-r10e
+            ```
+
+   4. 解密
+
+         1. ```
+            - openssl aes-256-cbc -k "$keyEncryption" -in android/app/hiprock.jks.enc  -d -a -out android/app/hiprock.jks
+            ```
+
+   5. 打包
+
+         1. source ./run.sh

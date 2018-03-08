@@ -204,3 +204,8 @@
               3. 签名打包 ./android/app/build/outputs/apk/app-release.apk
               4. ​
 
+       12. 代码规范
+
+           1. import React, { Component } from 'react';
+           2. 句末加双引号
+
